@@ -1,12 +1,17 @@
 "use client"
 import {useState} from "react";
 import { Formik, Form, Field } from 'formik';
-import {required} from "@/lib/validations";
 import {isEmpty, errorInputClass} from "@/lib/utils";
+import {Yup} from '@/lib/schema'
+
+const SignupSchema = Yup.object().shape({
+  username: Yup.mixed().maxLength('حداکثر 10 کاراکتر').minimumLength('حداقل سه کاراکتر').required('اجباری است'),
+  password: Yup.string()
+    .required('الزامی است')
+});
 export default function Login() {
   const [loading, setLoading] = useState(false)
   const submitForm = (validateForm, payload) => {
-    // console.log(v)
     return validateForm().then((proceed) => {
       if (isEmpty(proceed)) {
         console.log(payload)
@@ -16,7 +21,7 @@ export default function Login() {
   }
   return <main className='w-full px-5 flex justify-center mt-16'>
     <div className='grid grid-cols-1 gap-5 bg-gray-100 w-full md:w-1/2 lg:w-1/3 p-5'>
-      <Formik initialValues={{password: '', username: ''}}>
+      <Formik initialValues={{password: '', username: ''}} validationSchema={SignupSchema}>
         {({ errors, touched, values, validateForm }) => (
           <Form className='grid gap-4'>
             <div className='flex flex-col'>
@@ -24,7 +29,7 @@ export default function Login() {
               <Field
                 className={errorInputClass(errors.username)}
                 name="username"
-                validate={required} />
+                />
               {errors.username && touched.username && <div className='text-red-500'>{errors.username}</div>}
             </div>
             <div className='flex flex-col'>
@@ -32,7 +37,6 @@ export default function Login() {
               <Field
                 className={errorInputClass(errors.password)}
                 name="password"
-                validate={required}
                 type='password'
               />
               {errors.password && touched.password && <div className='text-red-500'>{errors.password}</div>}
