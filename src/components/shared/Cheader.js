@@ -4,6 +4,7 @@ export default function Cheader () {
   const menuItems = [
     {text: 'خانه', link: '/'},
     {text: 'ورود', link: '/login'},
+    {text: 'فرم پیچیده', link: '/complexform'},
     {text: 'درباره ما', link: '/contactUs'},
   ]
   return <header>
