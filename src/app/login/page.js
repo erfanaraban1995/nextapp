@@ -4,9 +4,6 @@ import { Formik, Form, Field } from 'formik';
 import {isEmpty, errorInputClass} from "@/lib/utils";
 import {Yup} from '@/lib/schema'
 import MultiSelect from "@/app/login/multiSelect";
-
-console.log(Yup)
-
 const SignupSchema = Yup.object().shape({
   username: Yup.mixed().maxLength('حداکثر 10 کاراکتر').minimumLength('حداقل سه کاراکتر').required('اجباری است'),
   password: Yup.string()
