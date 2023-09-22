@@ -1,11 +1,10 @@
-import {useState} from "react";
-
 export default function MultiSelect(props) {
   const {items, value} = props
-  const [array, setArray] = useState([])
   const emitEvent = (item) => {
-    setArray(arr => [...arr, item])
-    props.addvalue(item)
+    const findSameData = value.find(i => i.value === item.value)
+    if (!findSameData) {
+      props.addvalue(item)
+    }
   }
   return <div>
     <div className='w-full flex flex-wrap gap-1 bg-white border border-gray-300 outline-0 rounded-lg p-2'>
@@ -14,7 +13,7 @@ export default function MultiSelect(props) {
       ))}
     </div>
     {items.map(item => (
-      <div key={item.value} onClick={() => emitEvent(item)}>{item.text}</div>
+      <div className='cursor-pointer' key={item.value} onClick={() => emitEvent(item)}>{item.text}</div>
     ))}
   </div>
 }
