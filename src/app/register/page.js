@@ -21,7 +21,7 @@ export default function Register () {
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
-      const response = await fetch('http://localhost:3001/api/login')
+      const response = await fetch('http://localhost:3000/api/login')
     },
   })
   const evidences = [
@@ -42,6 +42,7 @@ export default function Register () {
         <input
           className='border border-gray-300 outline-0 rounded-lg p-2'
           name="firstName"
+          id='firstName'
           type="text"
           onChange={formik.handleChange}
           value={formik.values.firstName}
@@ -53,6 +54,7 @@ export default function Register () {
         <input
           className='border border-gray-300 outline-0 rounded-lg p-2'
           name="lastName"
+          id='lastName'
           type="text"
           onChange={formik.handleChange}
           value={formik.values.lastName}
@@ -63,6 +65,7 @@ export default function Register () {
       <div className='flex flex-col'>
         <label htmlFor="firstName" className='mb-2'>مدارک</label>
         <MultiSelect
+          id='evidences'
           name="evidences"
           items={evidences}
           value={formik.values.evidences}

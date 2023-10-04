@@ -12,7 +12,7 @@ export default function Cheader () {
       <ul>
         {menuItems.map(item => (
           <li key={item.link}>
-            <Link href={item.link}>{item.text}</Link>
+            <Link id={item.link} href={item.link}>{item.text}</Link>
           </li>
         ))}
       </ul>
