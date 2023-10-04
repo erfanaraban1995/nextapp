@@ -1,8 +1,9 @@
 'use client';
-import { useFormik} from "formik";
-import {Yup} from '@/lib/schema'
+import { useFormik } from "formik";
+import { Yup } from '@/lib/schema'
 import MultiSelect from "@/app/login/multiSelect";
-import {useState} from "react";
+import { useRouter } from 'next/navigation'
+
 const SignupSchema = Yup.object().shape({
   firstName: Yup.mixed().maxLength('حداکثر 10 کاراکتر').minimumLength('حداقل سه کاراکتر').required('اجباری است'),
   lastName: Yup.string()
@@ -10,6 +11,8 @@ const SignupSchema = Yup.object().shape({
   evidences: Yup.array().min(1, 'حداقل یک ایتم انتخاب شود')
 });
 export default function Register () {
+  const router = useRouter()
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -17,8 +20,8 @@ export default function Register () {
       evidences: [],
     },
     validationSchema: SignupSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      const response = await fetch('http://localhost:3001/api/login')
     },
   })
   const evidences = [
